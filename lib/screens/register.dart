@@ -57,7 +57,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               onPressed: () {
                 selectImage();
               },
-              child: const Text('Add Image'),
+              child: const Text(
+                'Add Image',
+                style: TextStyle(color: purple),
+              ),
             ),
             const SizedBox(
               height: 36,
@@ -113,7 +116,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: 56,
                 child: const Text(
                   'Sign up',
-                  style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 width: double.infinity,
                 alignment: Alignment.center,
@@ -124,7 +128,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Radius.circular(4.0),
                     ),
                   ),
-                  color: blue,
+                  color: purple,
                 ),
               ),
             ),
@@ -140,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  child: const Text("Don't have an account?"),
+                  child: const Text("Already have an Account?"),
                   padding: const EdgeInsets.symmetric(vertical: 8),
                 ),
               ],

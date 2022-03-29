@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wiz/utils/colors.dart';
 
 class TextFieldInput extends StatelessWidget {
   final TextEditingController textEditingController;
@@ -20,7 +21,7 @@ class TextFieldInput extends StatelessWidget {
     return TextField(
       controller: textEditingController,
       decoration: InputDecoration(
-        label: Text(label),
+        label: Text(label,style: TextStyle(color: Colors.grey[600]),),
         hintText: hintText,
         border: InputBorder.none,
         filled: false,
