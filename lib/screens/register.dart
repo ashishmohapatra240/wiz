@@ -1,0 +1,56 @@
+import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:wiz/utils/utils.dart';
+
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  Uint8List? _image;
+  void selectImage() async {
+    Uint8List? im = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = im;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: ListView(
+          children: [
+            Stack(
+              children: [
+                _image != null
+                    ? CircleAvatar(
+                        radius: 64, backgroundImage: MemoryImage(_image!))
+                    : const CircleAvatar(
+                        radius: 64,
+                        backgroundImage: NetworkImage(
+                          'https://www.linkpicture.com/q/Profile-Picture_2.png',
+                        ),
+                      ),
+              ],
+            ),
+             TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            onPressed: () {
+              selectImage();
+            },
+            child: const Text('Add Image'),
+          ),
+          ],
+        ),
+      ),
+    );
+  }
+}

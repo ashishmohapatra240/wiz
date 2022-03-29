@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:wiz/utils/colors.dart';
+import 'package:wiz/screens/register.dart';
 
 void main() {
-  runApp(const Home());
+  runApp(const MyApp());
 }
 
-class Home extends StatelessWidget {
-  const Home({ Key? key }) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return const MaterialApp(
+      title: 'Flutter Demo',
+     debugShowCheckedModeBanner: false,
+      home: RegisterScreen(),
     );
   }
 }
+
