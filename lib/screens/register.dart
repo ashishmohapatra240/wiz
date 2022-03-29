@@ -12,6 +12,11 @@ class RegisterScreen extends StatefulWidget {
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
+final TextEditingController _nameController = TextEditingController();
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
+final TextEditingController _regdNoController = TextEditingController();
+
 class _RegisterScreenState extends State<RegisterScreen> {
   Uint8List? _image;
   void selectImage() async {
@@ -34,9 +39,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     _image != null
                         ? CircleAvatar(
-                            radius: 64, backgroundImage: MemoryImage(_image!))
+                            radius: 48, backgroundImage: MemoryImage(_image!))
                         : const CircleAvatar(
-                            radius: 64,
+                            radius: 48,
                             backgroundImage: NetworkImage(
                               'https://www.linkpicture.com/q/Profile-Picture_2.png',
                             ),
@@ -53,10 +58,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 },
                 child: const Text('Add Image'),
               ),
-              const TextFieldInput(hintText: '', textEditingController: null, textInputType: null,
-                
+              SizedBox(height: 36,),
+              TextFieldInput(
+                label: 'Name',
+                hintText: '',
+                textEditingController: _nameController,
+                textInputType: TextInputType.text,
               ),
-              
+              const SizedBox(
+                height: 16,
+              ),
+              TextFieldInput(
+                hintText: '',
+                textEditingController: _emailController,
+                textInputType: TextInputType.text, label: 'Email ID',
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              TextFieldInput(
+                hintText: '',
+                textEditingController: _passwordController,
+                textInputType: TextInputType.text, label: 'Password', isPass: true,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              TextFieldInput(
+                hintText: '',
+                textEditingController: _regdNoController,
+                textInputType: TextInputType.text, label: 'Registration Number',
+              ),
             ],
           ),
         ),
