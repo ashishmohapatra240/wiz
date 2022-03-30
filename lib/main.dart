@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:wiz/screens/dummy.dart';
+import 'package:wiz/screens/login.dart';
 import 'package:wiz/screens/register.dart';
+import 'package:wiz/widgets/assignments.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +17,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Flutter Demo',
      debugShowCheckedModeBanner: false,
-      home: RegisterScreen(),
+      home: dummy(),
     );
   }
 }
