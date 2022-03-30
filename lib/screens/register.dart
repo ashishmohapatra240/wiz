@@ -2,6 +2,8 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:wiz/resources/auth_methods.dart';
+import 'package:wiz/screens/choose.dart';
 import 'package:wiz/utils/colors.dart';
 import 'package:wiz/utils/utils.dart';
 import 'package:wiz/widgets/text_field_imput.dart';
@@ -13,6 +15,7 @@ class RegisterScreen extends StatefulWidget {
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
+Map<String, String> inputs = {};
 final TextEditingController _nameController = TextEditingController();
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
@@ -29,6 +32,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    showSnackbar(String content, BuildContext context) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(content),
+      ));
+    }
     return SafeArea(
         child: Scaffold(
       body: Padding(
@@ -103,15 +111,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 16,
             ),
             InkWell(
-              // onTap: () async {
-              //   String res = await AuthMethods().signupUser(
-              //     email: _emailController.text,
-              //     password: _passwordController.text,
-              //     username: _usernameController.text,
-              //     bio: _bioController.text,
-              //     file: _image!,
-              //   );
-              // },
+              onTap: () {
+                inputs = {
+                  "name": _nameController.text,
+                  "email": _emailController.text,
+                  "password": _passwordController.text,
+                  "regdNo": _regdNoController.text,
+                };
+                if (inputs["name"] != null && _image != null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => choose(
+                        inputs: inputs,
+                        image: _image!,
+                      ),
+                    ),
+                  );
+                }
+                else{
+                  showSnackbar('Warning, Enter all fields!', context);
+                }
+              },
               child: Container(
                 height: 56,
                 child: const Text(

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "905039578022",
+    "project_id": "wizdom-4fd4d",
+    "storage_bucket": "wizdom-4fd4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:905039578022:android:51aa613947e09ef95d0567",
+        "android_client_info": {
+          "package_name": "com.example.wiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "905039578022-q0eoha63ikf4dds6c0r2gsmnk487siul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2nnBJThFGw6rzZrUIp_srSy8_qhw_VKE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "905039578022-q0eoha63ikf4dds6c0r2gsmnk487siul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
