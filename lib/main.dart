@@ -6,6 +6,8 @@ import 'package:wiz/screens/home_student.dart';
 import 'package:wiz/screens/home_educator.dart';
 import 'package:wiz/screens/login.dart';
 import 'package:wiz/screens/register.dart';
+import 'package:wiz/screens/upload_files.dart';
+import 'package:wiz/utils/colors.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
      debugShowCheckedModeBanner: false,
-      home: home_educator(),
+      home: UploadFiles(color: Colors.white),
     );
   }
 }

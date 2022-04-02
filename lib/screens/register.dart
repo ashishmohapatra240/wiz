@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wiz/resources/auth_methods.dart';
+import 'package:wiz/resources/storage_methods.dart';
 import 'package:wiz/screens/choose.dart';
 import 'package:wiz/screens/login.dart';
 import 'package:wiz/utils/colors.dart';
@@ -22,6 +23,7 @@ final TextEditingController _nameController = TextEditingController();
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
 final TextEditingController _regdNoController = TextEditingController();
+final bool isRegdNo=false;
 
 class _RegisterScreenState extends State<RegisterScreen> {
   Uint8List? _image;
@@ -120,7 +122,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   "email": _emailController.text,
                   "password": _passwordController.text,
                 };
-                if ((inputs["name"] != null && _regdNoController.text==null) && _image != null) {
+                if ((inputs["name"] != null && isRegdNo) && _image != null) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(

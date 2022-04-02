@@ -10,6 +10,8 @@ import 'package:wiz/utils/colors.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as Path;
 import 'package:firebase_core/firebase_core.dart';
+// import 'package:screenshot_callback/screenshot_callback.dart';
+
 
 class home_educator extends StatefulWidget {
   const home_educator({Key? key}) : super(key: key);
@@ -42,6 +44,43 @@ class _home_educatorState extends State<home_educator> {
     // final urlDownload = await snapshot.ref.getDownloadURL();
     // print('Download-Link: $urlDownload');
   }
+
+  // late ScreenshotCallback screenshotCallback;
+
+  // String text = "Ready..";
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   init();
+  // }
+
+  // void init() async {
+  //   await initScreenshotCallback();
+
+  // }
+
+  // //It must be created after permission is granted.
+  // Future<void> initScreenshotCallback() async {
+  //   screenshotCallback = ScreenshotCallback();
+
+  //   screenshotCallback.addListener(() {
+  //     setState(() {
+  //       text = "Screenshot Taken!";
+  //     });
+  //   });
+
+  //   screenshotCallback.addListener(() {
+  //     print("We can add multiple listeners ");
+  //   });
+  // }
+
+  // @override
+  // void dispose() {
+  //   screenshotCallback.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +140,7 @@ class _home_educatorState extends State<home_educator> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => UploadFiles(),
+                                    builder: (context) => UploadFiles(color: purple,),
                                   ),
                                 );
                               },
@@ -149,7 +188,9 @@ class _home_educatorState extends State<home_educator> {
                   fontSize: 20,
                 ),
               ),
-              SizedBox(width: 8,),
+              SizedBox(
+                width: 8,
+              ),
               Text(
                 'Create your own meet',
                 style: TextStyle(
@@ -160,7 +201,7 @@ class _home_educatorState extends State<home_educator> {
               ),
             ],
           ),
-          SizedBox(height:24),
+          SizedBox(height: 24),
           // Container(
           //   decoration: BoxDecoration(
           //       borderRadius: BorderRadius.circular(80),
@@ -173,33 +214,75 @@ class _home_educatorState extends State<home_educator> {
               // color: purple,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                  color:Colors.grey,
-                  ),
+                color: Color.fromARGB(255, 212, 212, 212),
+              ),
             ),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      'Z-Connect',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
                   Padding(
-                    padding: EdgeInsets.all(8),
+                    padding: EdgeInsets.fromLTRB(8, 16, 8, 2),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        
+                        Image.asset(
+                          './assets/logo.png',
+                          height: 48,
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        const Text(
+                          'Z-Connect',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(width: 84,),
+                        ButtonTheme(
+                          minWidth: 400,
+                          height: 300,
+                          child: SizedBox(
+                            height: 36,
+                            width: 108,
+                            child: TextButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(purple),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {
+                                StorageMethods().getData();
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const <Widget>[
+                                  Text(
+                                    'Select',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ]),
           ),
+          
         ]),
       ),
     );

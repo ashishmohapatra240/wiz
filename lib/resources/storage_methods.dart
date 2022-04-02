@@ -25,12 +25,21 @@ class StorageMethods {
 CollectionReference _collectionRef =
     FirebaseFirestore.instance.collection('Book');
 
-Future<void> getData() async {
+Future<bool> getData() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot = await _collectionRef.get();
 
     // Get data from docs and convert map to List
     final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
-    print(allData);
+    final allRegdNo = allData.map((dynamic e) => (e["RegdNo"] ?? "").toString()).toList();
+    print(allRegdNo.contains("2001106486"));
+    if(allRegdNo.contains("2001106486")|| allRegdNo.contains("2001106576") || allRegdNo.contains("2001106486"))
+    {
+       return true;
+    }
+    else
+    return false;
+
+    
 }
 }
