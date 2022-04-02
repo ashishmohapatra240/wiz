@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
               ],
             ),
             SizedBox(
-              height: 24,
+              height: 36,
             ),
             const Text(
               'My Subjects',

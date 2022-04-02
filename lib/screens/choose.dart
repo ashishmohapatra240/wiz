@@ -53,7 +53,7 @@ class choose extends StatelessWidget {
                 ),
               ),
               onPressed: () async {
-                String res = await AuthMethods().signupUser(
+                String res = await AuthMethods().signupLearner(
                   name: inputs["name"]!,
                   email: inputs["email"]!,
                   password: inputs["password"]!,
@@ -96,7 +96,14 @@ class choose extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () async{
+                String res = await AuthMethods().signupEducator(
+                  name: inputs["name"]!,
+                  email: inputs["email"]!,
+                  password: inputs["password"]!,
+                  regdNo: inputs["regdNo"]!,
+                  file: image,);
+              },
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
                 child: Row(

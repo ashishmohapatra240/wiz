@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:wiz/hiii/dummy.dart';
 import 'package:wiz/screens/choose.dart';
-import 'package:wiz/screens/home.dart';
+import 'package:wiz/screens/home_student.dart';
+import 'package:wiz/screens/home_educator.dart';
+import 'package:wiz/screens/login.dart';
 import 'package:wiz/screens/register.dart';
 
 void main() async{
@@ -16,10 +19,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
      debugShowCheckedModeBanner: false,
-      home: RegisterScreen(),
+      home: home_educator(),
     );
   }
 }

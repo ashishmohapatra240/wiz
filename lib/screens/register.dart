@@ -1,9 +1,11 @@
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wiz/resources/auth_methods.dart';
 import 'package:wiz/screens/choose.dart';
+import 'package:wiz/screens/login.dart';
 import 'package:wiz/utils/colors.dart';
 import 'package:wiz/utils/utils.dart';
 import 'package:wiz/widgets/text_field_imput.dart';
@@ -37,6 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         content: Text(content),
       ));
     }
+
     return SafeArea(
         child: Scaffold(
       body: Padding(
@@ -116,9 +119,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   "name": _nameController.text,
                   "email": _emailController.text,
                   "password": _passwordController.text,
-                  "regdNo": _regdNoController.text,
                 };
-                if (inputs["name"] != null && _image != null) {
+                if ((inputs["name"] != null && _regdNoController.text==null) && _image != null) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -128,8 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   );
-                }
-                else{
+                } else {
                   showSnackbar('Warning, Enter all fields!', context);
                 }
               },
@@ -164,9 +165,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  child: const Text("Already have an Account?"),
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                Center(
+                  child: Row(
+                    children: [
+                      Text('Already have an Account?'),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => login()),
+                          );
+                        },
+                        child: Text(
+                          'LogIn',
+                          style: TextStyle(color: purple),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
