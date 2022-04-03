@@ -20,7 +20,7 @@ class VideoState extends State<Video> {
     Duration duration;
     final value = await _controller.position;
     print(value.toString());
-    return value.toString()  ;
+    return value.toString();
   }
 
   @override
@@ -35,6 +35,7 @@ class VideoState extends State<Video> {
   }
 
   final TextEditingController _DoubtController = TextEditingController();
+  final db = FirebaseFirestore.instance;
 
   @override
   void dispose() {
@@ -46,94 +47,121 @@ class VideoState extends State<Video> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(16, 64, 16, 64),
-          child: Column(
-            children: [
-              Text(
-                'Video',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              FutureBuilder(
-                future: _initializeVideoPlayerFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return Center(
-                      child: AspectRatio(
-                        aspectRatio: _controller.value.aspectRatio,
-                        child: VideoPlayer(_controller),
-                      ),
-                    );
-                  } else {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              TextField(
-                controller: _DoubtController,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  label: Text(
-                    'Ask your Doubt!',
-                    style: TextStyle(color: Colors.grey[600]),
-                  ),
-                  filled: false,
-                  contentPadding: const EdgeInsets.all(8.0),
-                ),
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(purple),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+      body: StreamBuilder<QuerySnapshot>(
+          stream: db.collection('Doubts').snapshots(),
+          builder: (context, snapshot) {
+            return SafeArea(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(16, 64, 16, 64),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Video',
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                ),
-                onPressed: ()async {
-                  var timeStamp=await getPosition();
-                  print(timeStamp);
-                  await FirebaseFirestore.instance.collection('Doubts').doc().set({
-                    'doubt': _DoubtController.text,
-                    'time-stamp':  timeStamp,
-                  });
-                },
-                child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      SizedBox(
-                        width: 16,
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    FutureBuilder(
+                      future: _initializeVideoPlayerFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return Center(
+                            child: AspectRatio(
+                              aspectRatio: _controller.value.aspectRatio,
+                              child: VideoPlayer(_controller),
+                            ),
+                          );
+                        } else {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      controller: _DoubtController,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        label: Text(
+                          'Ask your Doubt!',
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
+                        filled: false,
+                        contentPadding: const EdgeInsets.all(8.0),
                       ),
-                      Text(
-                        'Ask',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(purple),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
                         ),
                       ),
-                    ],
-                  ),
+                      onPressed: () async {
+                        var timeStamp = await getPosition();
+                        print(timeStamp);
+                        await FirebaseFirestore.instance
+                            .collection('Doubts')
+                            .doc()
+                            .set({
+                          'doubt': _DoubtController.text,
+                          'time-stamp': timeStamp,
+                        });
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const <Widget>[
+                            SizedBox(
+                              width: 16,
+                            ),
+                            Text(
+                              'Ask',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    // ElevatedButton(onPressed: (){
+                    //   List<QueryDocumentSnapshot<Object?>> mp=snapshot.data!.docs;
+                    //   print(mp);
+                    // }, child: Text('Kuch Bhi'),),
+                    // ListView(
+                    //   shrinkWrap: true,
+                    //   children: 
+                      
+                    //   snapshot.data!.docs.map((doc) {
+                    //     final dynamic data = doc.data();
+                        
+                    //     return Card(
+                    //       child: ListTile(
+                    //         title: Text(data?["doubt"]??""),
+                    //       ),
+                    //     );
+                    //   }).toList(),
+                    // )
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
+            );
+          }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           getPosition();

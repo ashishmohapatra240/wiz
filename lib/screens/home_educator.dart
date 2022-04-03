@@ -10,7 +10,6 @@ import 'package:wiz/utils/colors.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as Path;
 import 'package:firebase_core/firebase_core.dart';
-// import 'package:screenshot_callback/screenshot_callback.dart';
 
 
 class home_educator extends StatefulWidget {
@@ -45,42 +44,7 @@ class _home_educatorState extends State<home_educator> {
     // print('Download-Link: $urlDownload');
   }
 
-  // late ScreenshotCallback screenshotCallback;
 
-  // String text = "Ready..";
-
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   init();
-  // }
-
-  // void init() async {
-  //   await initScreenshotCallback();
-
-  // }
-
-  // //It must be created after permission is granted.
-  // Future<void> initScreenshotCallback() async {
-  //   screenshotCallback = ScreenshotCallback();
-
-  //   screenshotCallback.addListener(() {
-  //     setState(() {
-  //       text = "Screenshot Taken!";
-  //     });
-  //   });
-
-  //   screenshotCallback.addListener(() {
-  //     print("We can add multiple listeners ");
-  //   });
-  // }
-
-  // @override
-  // void dispose() {
-  //   screenshotCallback.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
