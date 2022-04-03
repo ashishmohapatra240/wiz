@@ -23,7 +23,7 @@ final TextEditingController _nameController = TextEditingController();
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
 final TextEditingController _regdNoController = TextEditingController();
-final bool isRegdNo=false;
+ bool isRegdNo=false;
 
 class _RegisterScreenState extends State<RegisterScreen> {
   Uint8List? _image;
@@ -116,7 +116,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 16,
             ),
             InkWell(
-              onTap: () {
+              onTap: () async{
+                isRegdNo= await StorageMethods().getData(_regdNoController.text);
+                print(isRegdNo);
                 inputs = {
                   "name": _nameController.text,
                   "email": _emailController.text,
@@ -124,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 };
                 if ((inputs["name"] != null && isRegdNo) && _image != null) {
                   Navigator.push(
-                    context,
+                    context,  
                     MaterialPageRoute(
                       builder: (context) => choose(
                         inputs: inputs,

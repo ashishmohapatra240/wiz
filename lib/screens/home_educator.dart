@@ -259,7 +259,7 @@ class _home_educatorState extends State<home_educator> {
                                 ),
                               ),
                               onPressed: () {
-                                StorageMethods().getData();
+                                // StorageMethods().getData();
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,

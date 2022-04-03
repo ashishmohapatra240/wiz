@@ -11,7 +11,7 @@ class StorageMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //adding image to firebase storage
-  Future<String> uploadImageToStorage(  
+  Future<String> uploadImageToStorage(
       String childName, Uint8List file, bool isPost) async {
     Reference ref =
         _storage.ref().child(childName).child(_auth.currentUser!.uid);
@@ -20,26 +20,22 @@ class StorageMethods {
     String downloadURL = await snap.ref.getDownloadURL();
     return downloadURL;
   }
-  
 
-CollectionReference _collectionRef =
-    FirebaseFirestore.instance.collection('Book');
+  CollectionReference _collectionRef =
+      FirebaseFirestore.instance.collection('Book');
 
-Future<bool> getData() async {
+  Future<bool> getData(String RegdNo) async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot = await _collectionRef.get();
 
     // Get data from docs and convert map to List
     final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
-    final allRegdNo = allData.map((dynamic e) => (e["RegdNo"] ?? "").toString()).toList();
+    final allRegdNo =
+        allData.map((dynamic e) => (e["RegdNo"] ?? "").toString()).toList();
     print(allRegdNo.contains("2001106486"));
-    if(allRegdNo.contains("2001106486")|| allRegdNo.contains("2001106576") || allRegdNo.contains("2001106486"))
-    {
-       return true;
-    }
+    if (allRegdNo.contains(RegdNo))
+      return true;
     else
-    return false;
-
-    
-}
+      return false;
+  }
 }

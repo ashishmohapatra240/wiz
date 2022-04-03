@@ -1,12 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:wiz/hiii/dummy.dart';
+import 'package:wiz/hiii/video.dart';
 import 'package:wiz/screens/choose.dart';
 import 'package:wiz/screens/home_student.dart';
 import 'package:wiz/screens/home_educator.dart';
 import 'package:wiz/screens/login.dart';
 import 'package:wiz/screens/register.dart';
 import 'package:wiz/screens/upload_files.dart';
+import 'package:wiz/screens/video.dart';
 import 'package:wiz/utils/colors.dart';
 
 void main() async{
@@ -24,8 +26,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
      debugShowCheckedModeBanner: false,
-      home: UploadFiles(color: Colors.white),
+      home: Video(),
     );
   }
 }
+
+
 
